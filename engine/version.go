@@ -21,6 +21,7 @@ package engine
 import (
 	"errors"
 	"fmt"
+
 	"github.com/cgrates/cgrates/utils"
 )
 
@@ -33,11 +34,18 @@ func CheckVersions(storage Storage) error {
 	x := CurrentDBVersions(storType)
 	dbVersion, err := storage.GetVersions(utils.TBLVersions)
 	if err != nil {
-		// no data, write version
-		if err := storage.SetVersions(x, false); err != nil {
-			utils.Logger.Warning(fmt.Sprintf("Could not write current version to db: %v", err))
+		switch err {
+		case utils.ErrNotFound:
+			// no data, write version
+			if err := storage.SetVersions(x, false); err != nil {
+				msg := fmt.Sprintf("Could not write current version to db: %v", err)
+				return errors.New(msg)
+			}
+		case utils.ErrOldSchema:
+			return errors.New("old schema detected. Migration needed, use cgr-migrator")
+		default:
+			return errors.New(fmt.Sprintf("Could not get schema versions: %v", err))
 		}
-
 	} else {
 		// comparing versions
 		message := dbVersion.Compare(x, storType)

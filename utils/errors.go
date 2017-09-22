@@ -46,6 +46,7 @@ var (
 	ErrResourceUnavailable     = errors.New("RESOURCE_UNAVAILABLE")
 	ErrNoActiveSession         = errors.New("NO_ACTIVE_SESSION")
 	ErrPartiallyExecuted       = errors.New("PARTIALLY_EXECUTED")
+	ErrOldSchema               = errors.New("OLD_SCHEMA")
 )
 
 // NewCGRError initialises a new CGRError

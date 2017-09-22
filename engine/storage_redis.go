@@ -1552,10 +1552,23 @@ func (rs *RedisStorage) MatchReqFilterIndex(dbKey, fldName, fldVal string) (item
 	return
 }
 
+func (rs *RedisStorage) CheckStructVersion() (err error) {
+	l, err := rs.Cmd("KEYS", utils.VERSION_PREFIX+"struct").List()
+	if err != nil || len(l) == 0 {
+		return utils.ErrNotFound
+	}
+	return
+}
+
 func (rs *RedisStorage) GetVersions(itm string) (vrs Versions, err error) {
 	x, err := rs.Cmd("HGETALL", itm).Map()
 	if err != nil {
 		return nil, err
+	}
+	if len(x) == 0 {
+		if rs.CheckStructVersion() != utils.ErrNotFound {
+			return nil, utils.ErrOldSchema
+		}
 	}
 	vrs, err = utils.MapStringToInt64(x)
 	if err != nil {
