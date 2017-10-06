@@ -1,0 +1,30 @@
+#!/usr/bin/make -f
+export DH_VERBOSE=1
+
+export DH_GOPKG := github.com/cgrates/cgrates
+export DH_GOLANG_BUILDPKG := ${DH_GOPKG}/cmd/cgr-engine ${DH_GOPKG}/cmd/cgr-engine ${DH_GOPKG}/cmd/cgr-loader ${DH_GOPKG}/cmd/cgr-console ${DH_GOPKG}/cmd/cgr-migrator ${DH_GOPKG}/cmd/cgr-tester
+
+%:
+	dh $@ --builddirectory=build --buildsystem=golang --with=golang,systemd,sphinxdoc --no-source
+
+override_dh_auto_clean:
+	rm -rf docs/_build
+	dh_auto_clean
+
+override_dh_auto_configure:
+	mkdir -p build/src
+	GOPATH=$(CURDIR)/build glide --home=$(CURDIR)/build install
+	dh_auto_configure
+
+override_dh_auto_build:
+	dh_auto_build
+	PYTHONPATH=. http_proxy='127.0.0.1:9' sphinx-build -N -btext docs/ \
+		docs/_build/text # text generator
+
+override_dh_auto_test:
+#	DH_GOLANG_BUILDPKG="$(addprefix $(DH_GOPKG)/,$(subst ./,,$(shell glide novendor)))" dh_auto_test
+
+override_dh_auto_install:
+	dh_auto_install -O--no-source
+# --no-source doesn't work
+	rm -rf debian/cgrates/usr/share/gocode/

@@ -1,0 +1,32 @@
+Source: cgrates
+Priority: optional
+Section: comm
+Maintainer: DanB <danb@cgrates.org>
+Uploaders:
+ Victor Seva <vseva@debian.org>
+Build-Depends:
+ ca-certificates,
+ debhelper (>= 10~),
+ dh-golang,
+ golang-any,
+ golang-glide,
+ python3-sphinx,
+Standards-Version: 4.1.1
+Homepage: https://github.com/cgrates/cgrates
+XS-Go-Import-Path: github.com/cgrates/cgrates
+Testsuite: autopkgtest-pkg-go
+
+Package: cgrates
+Architecture: any
+Built-Using:
+ ${misc:Built-Using}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ lsb-base,
+ python,
+Description: Real-time Charging System for Telecom & ISP environments
+ CGRateS is a very fast and easy scalable real-time charging system for
+ Telecom environments.
+ .
+ Browsable HTML docs http://readthedocs.org/docs/cgrates/

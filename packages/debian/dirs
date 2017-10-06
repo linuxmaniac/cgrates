@@ -1,0 +1,7 @@
+var/lib/cgrates/history
+var/spool/cgrates/cdrc/in
+var/spool/cgrates/cdrc/out
+var/spool/cgrates/cdre/csv
+var/spool/cgrates/cdre/fwv
+var/spool/cgrates/failed_posts
+var/spool/cgrates/tpe

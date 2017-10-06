@@ -1,0 +1,17 @@
+[Unit]
+Description=Control CGRateS - carrier grade real-time charging system
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/cgr-engine
+KillMode=mixed
+User=cgrates
+Group=cgrates
+StandardOutput=journal
+StandardError=journal
+Restart=on-failure
+Documentation=file://usr/share/doc/cgrates/index.txt
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,36 @@
+cgrates (0.9.1~rc8+dev0) unstable; urgency=low
+
+  * RC8+dev0.
+
+ -- Victor Seva <vseva@debian.org>  Fri, 06 Oct 2017 09:53:11 +0200
+
+cgrates (0.9.1~rc7) unstable; urgency=low
+
+  * RC7.
+
+ -- DanB <danb@cgrates.org>  Wed, 03 Aug 2015 14:04:00 -0600
+
+cgrates (0.9.1~rc6) unstable; urgency=low
+
+  * RC6.
+
+ -- DanB <danb@cgrates.org>  Wed, 10 Sep 2014 13:30:00 +0100
+
+cgrates (0.9.1~rc5) unstable; urgency=low
+
+  * RC5.
+
+ -- DanB <danb@cgrates.org>  Mon, 18 Aug 2014 13:30:00 +0100
+
+
+cgrates (0.9.1~rc4) unstable; urgency=low
+
+  * RC4.
+
+ -- DanB <danb@cgrates.org>  Thu, 25 Mar 2014 17:30:00 +0100
+
+cgrates (0.9.1~rc3) unstable; urgency=low
+
+  * RC3.
+
+ -- DanB <danb@cgrates.org>  Fri, 03 Jan 2014 17:37:31 +0100
